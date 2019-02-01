@@ -7,7 +7,7 @@ import { inputChangeAction } from "./action";
 import { onBtnClickAction } from "./action";
 import createSagaMiddleware from "redux-saga";
 import { catchAction } from "./saga";
-
+import {getTitleselector,getAuthorselector,getImageselector,getDesselector,getTextselector} from "./selectors";
 class Book extends Component {
   inputChangeHandler = event => {
     let { inputChangeHandler } = this.props;
@@ -20,7 +20,7 @@ class Book extends Component {
       onbtnClickHandler,
       image,
       textInputValue,
-      name,
+      title,
       author,
       description
     } = this.props;
@@ -35,7 +35,7 @@ class Book extends Component {
             OnChangeHandler={this.inputChangeHandler}
             OnClickHandler={onbtnClickHandler}
             imgHref={image}
-            userName={name}
+            userName={title}
             userAuthor={author}
             userDes={description}
           />
@@ -46,7 +46,11 @@ class Book extends Component {
 }
 
 const mapStateToProps = state => ({
-  ...state
+  title:getTitleselector(state),
+  author:getAuthorselector(state),
+  image:getImageselector(state),
+  description:getDesselector(state),
+  textInputValue:getTextselector(state)
 });
 
 const mapDipsatchToProps = dispatch => ({
